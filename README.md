@@ -19,7 +19,7 @@ API сервис, посылающий запросы к API-сервису Weat
 - Возможность изменять город.
 
 
-## Технологии
+## Технологии 
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.121-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 
