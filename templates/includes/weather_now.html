@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">{{ title }}</h1>
+    
+    {% if error %}
+        <div class="alert alert-danger">
+            <h4>Ошибка:</h4>
+            <p>{{ error }}</p>
+        </div>
+    {% elif weather_data %}
+        <div class="weather-info">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    {% for day in weather_data %}
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="card-title mb-0">
+                                {{ day.weather_emoji }} {{ day.date }} - {{ day.weather_status }}
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="card-text">
+                                        <strong>🏙️ Город:</strong> {{ day.found_city }}, {{ day.found_country }}
+                                    </p>
+                                    <p class="card-text">
+                                        <strong>🌡️ Текущая температура:</strong> {{ day.temp_c }}°C
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="card-text">
+                                        <strong>☁️ Облачность:</strong> {{ day.cloud }}%
+                                    </p>
+                                    <p class="card-text">
+                                        <strong>💧 Влажность:</strong> {{ day.humidity }}%
+                                    </p>
+                                    <p class="card-text">
+                                        <strong>🌧️ Вероятность дождя:</strong> {{ day.rain_chance }}%
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-warning text-center">
+            <h4>Данные о погоде отсутствуют</h4>
+            <p class="mb-0">Попробуйте выбрать другой город или повторить запрос позже</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock content %}

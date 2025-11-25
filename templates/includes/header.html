@@ -1,0 +1,74 @@
+<header class="pt-3">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+    <!-- место для лого
+    <a class="navbar-brand" href="/">
+        <img src="" height="50" class="" alt="" />
+    </a> -->
+      <div class="d-flex justify-content-end">
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              Главная
+            </a>
+          </li>
+          <li class="nav-item pe-5">
+            <a class="nav-link" href="/weather/now">
+              Погода сейчас
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/weather/today">
+              Погода сегодня
+            </a>
+          </li>
+          <li class="nav-item pe-5">
+            <a class="nav-link" href="/weather/weather_to_days">
+              Погода на 3 дня
+            </a>
+          </li>
+        </ul>
+        <!-- Блок авторизации -->
+        <div class="d-flex align-items-center">
+          {% if request.cookies.get('user_identifier') %}
+            {% set user_identifier = request.cookies.get('user_identifier') %}
+            {% set user_data = user_identifier[1:-1].split('@@') %}
+            {% set user_name = user_data[0] %}
+            
+            <!-- Форма изменения города -->
+            <form action="/update_city" method="post" class="me-3">
+              <div class="input-group input-group-sm">
+                <input type="text" 
+                       class="form-control" 
+                       name="city" 
+                       placeholder="Город"
+                       value="{{ request.cookies.get('user_city', '') }}"
+                       required>
+                <button class="btn btn-outline-secondary" type="submit">✏️</button>
+              </div>
+            </form>
+            
+            <!-- Имя пользователя и выход -->
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ user_name }}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/logout">Выйти</a></li>
+              </ul>
+            </div>
+          {% else %}
+            <div class="d-flex gap-2">
+              <a class="btn btn-outline-primary btn-sm" href="/login">
+                Вход
+              </a>
+              <a class="btn btn-primary btn-sm" href="/register">
+                Регистрация
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

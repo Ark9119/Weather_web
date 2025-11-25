@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Главная страница{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 mx-auto text-center">
+      <h1 class="display-4">Добро пожаловать в сервис погоды!</h1>
+      <p class="lead">Получайте актуальную информацию о погоде в любом городе</p>
+      
+      {% if not request.cookies.get('user_identifier') %}
+      <div class="alert alert-info mt-4">
+        <h5>Для персонализации сервиса</h5>
+        <p>Зарегистрируйтесь, чтобы мы могли запомнить ваш город и показывать актуальную погоду именно для вас!</p>
+        <a href="/register" class="btn btn-primary">Зарегистрироваться</a>
+        <a href="/login" class="btn btn-outline-primary">Войти</a>
+      </div>
+      {% endif %}
+      
+      <!-- Использование CSS Grid -->
+      <div class="row mt-5 row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Текущая погода</h5>
+              <p class="card-text flex-grow-1">Узнайте текущие погодные условия</p>
+              <a href="/weather/now" class="btn btn-primary mt-auto">Перейти</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Погода на сегодня</h5>
+              <p class="card-text flex-grow-1">Подробный прогноз на сегодняшний день</p>
+              <a href="/weather/today" class="btn btn-primary mt-auto">Перейти</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Прогноз на несколько дней</h5>
+              <p class="card-text flex-grow-1">Планируйте свои дни с точным прогнозом</p>
+              <a href="/weather/weather_to_days" class="btn btn-primary mt-auto">Перейти</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
